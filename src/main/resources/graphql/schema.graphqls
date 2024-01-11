@@ -1,0 +1,53 @@
+# el Query me sirve solo para hacer consultas
+type Query {
+    # Students
+    findStudentById(studentId: String) : Student,
+    findAllStudent : [Student]
+
+    # Courses
+    findCourseById(courseId: String) : Course,
+    findAllCourse : [Course]
+}
+
+#el mutatio es para crear, editar y eliminar
+type Mutation {
+    # Students
+    createStudent(inputStudent: InputStudent) : Student
+    deleteStudentById(studentId: String) : String
+
+    # Courses
+    createCourse(inputCourse: InputCourse) : Course
+    deleteCourseById(courseId: String) : String
+}
+
+# Aqui tenemos la estructura del student como objeto
+type Student {
+    id: ID,
+    name: String,
+    lastName: String,
+    age: Int,
+    course: Course
+}
+
+# este input viene de la clase inputStudent para poder crearlo
+input InputStudent {
+    name: String,
+    lastName: String,
+    age: Int,
+    courseId : String!
+}
+
+
+type Course {
+    id: ID,
+    name: String,
+    category: String,
+    teacher: String
+    studentList: [Student!]!
+}
+
+input InputCourse {
+    name: String,
+    category: String,
+    teacher : String
+}
